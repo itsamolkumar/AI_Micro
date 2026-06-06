@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MicroFoodie - Culinary & Budget Intelligence</title>
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="app-container">
+    <!-- Sidebar / Inputs Panel -->
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <div class="logo">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="logo-icon">
+            <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+          </svg>
+          <h1>Micro<span>Foodie</span></h1>
+        </div>
+        <p class="subtitle">Culinary & Budget Intelligence</p>
+      </div>
+
+      <form id="intelligence-form" class="form-container">
+        <!-- Budget Constraint Section -->
+        <div class="form-section">
+          <label class="section-label">
+            <span>Daily Budget Constraint</span>
+            <span id="budget-val" class="highlight-val">$25</span>
+          </label>
+          <div class="input-with-icon">
+            <span class="currency-symbol">$</span>
+            <input type="number" id="budget-input" min="5" max="200" value="25" step="1" required>
+          </div>
+          <input type="range" id="budget-slider" min="5" max="150" value="25" class="slider">
+          <div class="slider-labels">
+            <span>$5 (Budget)</span>
+            <span>$150 (Premium)</span>
+          </div>
+        </div>
+
+        <!-- Daily Schedule Selection -->
+        <div class="form-section">
+          <label class="section-label">Daily Schedule Type</label>
+          <div class="radio-grid">
+            <label class="radio-card">
+              <input type="radio" name="schedule" value="busy" checked>
+              <div class="radio-content">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="radio-icon"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                <div class="radio-text">
+                  <span class="title">Busy Workday</span>
+                  <span class="desc">Quick 10-15m prep</span>
+                </div>
+              </div>
+            </label>
+            <label class="radio-card">
+              <input type="radio" name="schedule" value="standard">
+              <div class="radio-content">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="radio-icon"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+                <div class="radio-text">
+                  <span class="title">Standard</span>
+                  <span class="desc">Balanced 20-30m prep</span>
+                </div>
+              </div>
+            </label>
+            <label class="radio-card">
+              <input type="radio" name="schedule" value="relaxed">
+              <div class="radio-content">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="radio-icon"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+                <div class="radio-text">
+                  <span class="title">Relaxed</span>
+                  <span class="desc">Up to 60m slow cook</span>
+                </div>
+              </div>
+            </label>
+          </div>
+
+          <!-- Schedule Exclusions / Busy Slots (Interactive) -->
+          <div class="schedule-slots-wrapper">
+            <span class="sub-label">Busy Timeblocks (Reduces Meal Complexity)</span>
+            <div class="checkbox-buttons">
+              <label class="check-btn">
+                <input type="checkbox" id="busy-morning">
+                <span>Busy Morning</span>
+              </label>
+              <label class="check-btn">
+                <input type="checkbox" id="busy-afternoon">
+                <span>Busy Afternoon</span>
+              </label>
+              <label class="check-btn">
+                <input type="checkbox" id="busy-evening">
+                <span>Busy Evening</span>
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <!-- Dietary Preferences -->
+        <div class="form-section">
+          <label class="section-label">Dietary Preferences</label>
+          <div class="chips-container">
+            <label class="chip">
+              <input type="checkbox" name="diet" value="gluten-free">
+              <span class="chip-label">Gluten-Free</span>
+            </label>
+            <label class="chip">
+              <input type="checkbox" name="diet" value="dairy-free">
+              <span class="chip-label">Dairy-Free</span>
+            </label>
+            <label class="chip">
+              <input type="checkbox" name="diet" value="vegetarian">
+              <span class="chip-label">Vegetarian</span>
+            </label>
+            <label class="chip">
+              <input type="checkbox" name="diet" value="vegan">
+              <span class="chip-label">Vegan</span>
+            </label>
+            <label class="chip">
+              <input type="checkbox" name="diet" value="keto">
+              <span class="chip-label">Keto / Low-Carb</span>
+            </label>
+          </div>
+        </div>
+
+        <!-- Excluded Ingredients -->
+        <div class="form-section">
+          <label class="section-label" for="allergy-input">Allergies / Disliked Ingredients</label>
+          <input type="text" id="allergy-input" placeholder="e.g. peanuts, cilantro, mushrooms" class="text-input">
+        </div>
+
+        <button type="submit" class="submit-btn" id="generate-btn">
+          <span>Generate Plan</span>
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="btn-icon">
+            <line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/>
+          </svg>
+        </button>
+      </form>
+
+      <div class="sidebar-footer">
+        <p>MicroFoodie v1.0 • Smart Culinary Agent</p>
+      </div>
+    </aside>
+
+    <!-- Main Output Dashboard -->
+    <main class="dashboard-area">
+      <!-- Welcome Empty State -->
+      <section id="empty-state" class="empty-state">
+        <div class="empty-icon-wrap">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="empty-icon">
+            <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+          </svg>
+        </div>
+        <h2>Configure Your Meal Intelligence Plan</h2>
+        <p>Set your daily budget, select your schedule, and tap "Generate Plan" to construct a customized culinary roadmap with real-time budget forecasting and cooking directions.</p>
+        <div class="demo-hints">
+          <span class="hint-title">Try these profiles:</span>
+          <div class="hint-btns">
+            <button class="hint-btn" onclick="loadPreset(12, 'busy', ['vegetarian'])">$12 Budget • Busy Day • Vegetarian</button>
+            <button class="hint-btn" onclick="loadPreset(45, 'relaxed', ['gluten-free', 'dairy-free'])">$45 Budget • Relaxed Day • Gluten/Dairy-Free</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Dashboard Output Container (Hidden by default) -->
+      <div id="dashboard-content" class="dashboard-content hidden">
+        <!-- Dashboard Header -->
+        <header class="dashboard-header">
+          <div>
+            <span class="badge" id="schedule-badge">Busy Day Plan</span>
+            <h2 id="dashboard-title">Today's Culinary Roadmap</h2>
+          </div>
+          <div class="actions-group">
+            <button class="action-btn" id="print-btn">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="btn-icon"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+              Print Plan
+            </button>
+            <button class="action-btn secondary" id="reset-btn">
+              Reset Plan
+            </button>
+          </div>
+        </header>
+
+        <!-- Top Overview Widgets: Budget Gauge & Plan Info -->
+        <div class="overview-grid">
+          <!-- Widget 4: BUDGET FEASIBILITY ANALYSIS -->
+          <div class="card budget-feasibility-card" id="budget-analysis-section">
+            <div class="card-header">
+              <h3>Budget Feasibility Analysis</h3>
+              <div id="feasibility-status-badge" class="status-badge status-feasible">FEASIBLE</div>
+            </div>
+            <div class="budget-gauge-container">
+              <div class="gauge-details">
+                <div class="cost-stat">
+                  <span class="stat-label">Estimated Cost</span>
+                  <span class="stat-val" id="total-cost-val">$0.00</span>
+                </div>
+                <div class="divider">vs</div>
+                <div class="budget-stat">
+                  <span class="stat-label">Stated Budget</span>
+                  <span class="stat-val" id="allowed-budget-val">$0.00</span>
+                </div>
+              </div>
+              <!-- Visual Progress Bar / Ring -->
+              <div class="gauge-bar-wrapper">
+                <div class="gauge-bar-fill" id="gauge-bar-fill"></div>
+              </div>
+              <p class="gauge-msg" id="gauge-message">Your plan is safely under budget!</p>
+            </div>
+            <!-- Dynamic money saving tips show here if over budget -->
+            <div id="budget-saving-tips" class="saving-tips hidden">
+              <h4 class="tips-title">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="tip-icon"><polygon points="7.86 2 16.14 2 22 7.86 22 16.14 16.14 22 7.86 22 2 16.14 2 7.86 7.86 2"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+                Recommended Money-Saving Adjustments
+              </h4>
+              <div class="tips-list" id="tips-container"></div>
+            </div>
+          </div>
+
+          <!-- Section 3: SMART SUBSTITUTIONS -->
+          <div class="card substitutions-card">
+            <div class="card-header">
+              <h3>Smart Substitutions Engine</h3>
+              <span class="sub-title-desc">Dynamic swaps & dietary alternatives</span>
+            </div>
+            <div class="subs-scroll-container">
+              <div class="subs-grid" id="substitutions-container">
+                <!-- Dynamic substitutions filled by JS -->
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Bottom Grid: Meal Plan & Grocery Checklist -->
+        <div class="dashboard-grid">
+          <!-- Section 1: MEAL PLAN -->
+          <section class="card meal-plan-card">
+            <div class="card-header">
+              <h3>Meal Plan</h3>
+              <span class="header-desc">Customized recipes & preparation checklists</span>
+            </div>
+            <div class="meal-list" id="meal-plan-container">
+              <!-- Dynamic meals go here -->
+            </div>
+          </section>
+
+          <!-- Section 2: GROCERY LIST -->
+          <section class="card grocery-card">
+            <div class="card-header">
+              <h3>Grocery List & Estimations</h3>
+              <span class="header-desc">Categorized list for shopping & costing</span>
+            </div>
+            <div class="grocery-content">
+              <div class="grocery-categories" id="grocery-container">
+                <!-- Dynamic categories go here -->
+              </div>
+              <div class="grocery-footer">
+                <p>Checked items are excluded from total cost (assume already in pantry)</p>
+              </div>
+            </div>
+          </section>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
